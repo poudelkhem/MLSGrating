@@ -1,0 +1,51 @@
+% *****************   MLS   Design*********************
+%@ Khem N poudel, Date 06/25/2017,MTSU
+
+%************************************************
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % Defining all the variables and parameters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ close all; clc;clear all; 
+ %Incident angle between normal and incident light
+ incangle=linspace(10,10,90);%[44.5:0.005:65];
+ %Operating WAVELENGTH
+ lambda=632.8;
+ % Refractive Index 
+ eta_air=1.0;
+ eta_Sio2=1.45;
+ eta_subtrate=1.0;
+ eta_superstrate=1.45;
+ %  The Grating Period is the  Period of whole structure
+ period=1; 
+ nmode=20;
+ %Thickness of structure
+ d_air=200;
+ d_Sio2=200;
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %   RCWA Implementation For m=5 or N=31 MLS 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ rcwa=RCWA('period',period,'modenumber',nmode);
+ rcwa.SetLayer(2,'index',eta_subtrate,'name','out');
+ rcwa.SetLayer(1,'index',eta_superstrate,'nAme','in'); 
+ rcwa.AddLayer('lyt',5*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',2*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',2*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',1*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',1*d_Sio2,'index',eta_Sio2); 
+ rcwa.AddLayer('lyt',2*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',1*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',4*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',1*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',1*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',1*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',1*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',3*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',1*d_air,'index',eta_air);
+ rcwa.AddLayer('lyt',2*d_Sio2,'index',eta_Sio2);
+ rcwa.AddLayer('lyt',3*d_air,'index',eta_air);
+ 
